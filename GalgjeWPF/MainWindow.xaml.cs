@@ -108,7 +108,8 @@ namespace GalgjeWPF
         
         private void btnVerberg_Click(object sender, RoutedEventArgs e)
         {
-            geheimWoord = txtInput.Text;
+            geheimWoord = txtInput.Text.ToLower();
+           
 
             btnRaad.Visibility = Visibility.Visible;
 
