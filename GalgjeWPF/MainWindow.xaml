@@ -13,6 +13,8 @@
     <DockPanel Background="Crimson" LastChildFill="True">
 
         <Grid DockPanel.Dock="Right">
+            
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
@@ -25,16 +27,24 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
+            <Image
+                Grid.RowSpan="4"
+                Grid.ColumnSpan="2"
+                Source="/assests/achtergrond.jpg"
+                Stretch="UniformToFill" />
             <TextBox
                 Name="txtTextDisplay"
-                Grid.Row="0"
+                Grid.Row="1"
                 Grid.RowSpan="2"
-                Grid.Column="0"
+                Grid.Column="1"
                 Margin="20"
                 HorizontalAlignment="Center"
-                Background="Crimson"
+                Background="Transparent"
                 BorderThickness="0"
-                FontSize="40">
+                FontSize="20"
+                Foreground="Crimson"
+                TextWrapping="Wrap"
+                >
                 Start een nieuw spel
             </TextBox>
             <TextBox
@@ -42,13 +52,14 @@
                 Grid.Row="3"
                 Grid.Column="0"
                 Height="70"
-                Margin="60,20"
+                Margin="150,50,0,0"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
-                Background="Black"
+                Background="White"
                 FontSize="40"
                 Foreground="Crimson"
-                Visibility="Hidden" />
+                Visibility="Hidden" Opacity="0.5"
+                TextAlignment="Center"/>
 
             <Button
                 Name="btnRaad"
@@ -75,7 +86,7 @@
             </Button>
             <Button
                 Name="btnVerberg"
-                Grid.Row="1"
+                Grid.Row="0"
                 Grid.Column="1"
                 Margin="60,20"
                 Background="Black"
@@ -85,6 +96,8 @@
                 Visibility="Hidden">
                 Verberg woord
             </Button>
+            
+            
 
         </Grid>
 
