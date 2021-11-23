@@ -39,12 +39,11 @@ namespace GalgjeWPF
         ///</Summary>
         private void btnRaad_Click(object sender, RoutedEventArgs e)
         {
-            int lengteWoord = txtInput.Text.Length; 
             if (levens != 1) 
             {
-                if (lengteWoord == 1)
+                if (txtInput.Text.Length == 1)
                 {
-                    if (geheimWoord.Contains(txtInput.Text))
+                    if (geheimWoord.Contains(txtInput.Text.ToLower()))
                     {
                         juisteLetters = juisteLetters + txtInput.Text + ","; 
                         PrintUserOutPut(); 
@@ -58,7 +57,7 @@ namespace GalgjeWPF
 
 
                 }
-                else if (lengteWoord > 1)
+                else if (txtInput.Text.Length > 1)
                 {
                     if (txtInput.Text == geheimWoord)
                     {
@@ -76,6 +75,7 @@ namespace GalgjeWPF
             else
             {
                 txtTextDisplay.Text = $"Oh spijtig, you lost :(\nBetter luck next time!";
+                btnRaad.Visibility = Visibility.Hidden;
             }
         }
              
@@ -122,8 +122,8 @@ namespace GalgjeWPF
         ///<summary>Methode om de users output te printen in de textbox, methode aangemaakt voor dubbele code te voorkomen</summary>///
         private void PrintUserOutPut() 
         {
-            txtTextDisplay.Text = $"{levens} levens \n" +
-                            $"Juiste letters: {juisteLetters}\n" +
+            txtTextDisplay.Text = $"{levens} levens \n\r" +
+                            $"Juiste letters: {juisteLetters}\n\r" +
                             $"Foute letters: {fouteLetters}";
         }
     }

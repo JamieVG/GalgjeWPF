@@ -11,14 +11,12 @@
     MinWidth="600"
     mc:Ignorable="d">
     <DockPanel Background="Crimson" LastChildFill="True">
-
         <Grid DockPanel.Dock="Right">
-            
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
 
+                
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -43,8 +41,7 @@
                 BorderThickness="0"
                 FontSize="20"
                 Foreground="Crimson"
-                TextWrapping="Wrap"
-                >
+                TextWrapping="Wrap">
                 Start een nieuw spel
             </TextBox>
             <TextBox
@@ -58,8 +55,9 @@
                 Background="White"
                 FontSize="40"
                 Foreground="Crimson"
-                Visibility="Hidden" Opacity="0.5"
-                TextAlignment="Center"/>
+                Opacity="0.5"
+                TextAlignment="Center"
+                Visibility="Hidden" />
 
             <Button
                 Name="btnRaad"
@@ -96,10 +94,6 @@
                 Visibility="Hidden">
                 Verberg woord
             </Button>
-            
-            
-
         </Grid>
-
     </DockPanel>
 </Window>
