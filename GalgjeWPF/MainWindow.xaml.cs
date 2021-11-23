@@ -92,6 +92,10 @@ namespace GalgjeWPF
             btnVerberg.Visibility = Visibility.Visible;
             txtInput.Visibility = Visibility.Visible;
             btnNieuwSpel.Visibility = Visibility.Hidden;
+            btnRaad.Visibility = Visibility.Hidden; 
+            levens = 10;
+            juisteLetters = "";
+            fouteLetters = "";
         }
 
         /// <summary>
