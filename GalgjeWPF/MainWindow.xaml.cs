@@ -81,7 +81,7 @@ namespace GalgjeWPF
                     else
                     {
                         levens--;
-                        
+                        PrintUserOutPut();
                     }
                 }
 
@@ -162,7 +162,6 @@ namespace GalgjeWPF
             imageOutput.Children.Clear();
             for (int i = 0; i < foutenAantal; ++i)
             {
-
                 imageOutput.Children.Add(afbeeldingStukjes[i]);
             }
             txtTextDisplay.Text = $"{levens} levens \n\r" +
@@ -204,10 +203,10 @@ namespace GalgjeWPF
 
         private static Image[] Afbeeldingen() 
         {
-            Debug.Assert(Directory.Exists("assets/assets")); // als de map niet bestaat crasht het programma
+            Debug.Assert(Directory.Exists("assets")); // als de map niet bestaat crasht het programma
             var arrayAfbeeldingen = new Image[10];
             int i = 0;
-            foreach (var item in Directory.EnumerateFiles("assets/assets"))
+            foreach (var item in Directory.EnumerateFiles("assets"))
             {
                 var path = new Uri(item, UriKind.Relative);
                 var bitMap = new BitmapImage(path);

@@ -11,7 +11,7 @@
     MinWidth="800"
     MinHeight="500"
     mc:Ignorable="d">
-    <DockPanel Background="Crimson" LastChildFill="True">
+    <DockPanel LastChildFill="True">
         <Grid DockPanel.Dock="Right">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
@@ -25,13 +25,10 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Grid Name="imageOutput" Grid.Row="1" Grid.RowSpan="2">
-                
-            </Grid>
             <Image
                 Grid.RowSpan="4"
                 Grid.ColumnSpan="2"
-                Source="/assests/achtergrond.jpg"
+                Source="assests/achtergrond.jpg"
                 Stretch="UniformToFill" />
             <TextBox
                 Name="txtTextDisplay"
@@ -117,6 +114,8 @@
                 MouseLeave="btnVerberg_MouseLeave">
                 Verberg woord
             </Button>
+            <Grid Name="imageOutput" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
+            </Grid>
         </Grid>
     </DockPanel>
 </Window>
