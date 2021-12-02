@@ -23,8 +23,12 @@ namespace GalgjeWPF
         // Declareren en initialiseren benodigde variabelen
         string juisteLetters;
         string fouteLetters;
-        string geheimWoord;
+        private static string geheimWoord;
         private int levens = 10;
+        string woordVerbergen;
+
+        string[] woordArray = new string[0];
+        string[] verborgenWoordArray = new string[0];
         public MainWindow()
         {
             InitializeComponent();
@@ -45,7 +49,10 @@ namespace GalgjeWPF
                 {
                     if (geheimWoord.Contains(txtInput.Text.ToLower()))
                     {
-                        juisteLetters = juisteLetters + txtInput.Text + ","; 
+                        juisteLetters = juisteLetters + txtInput.Text + ",";
+                        int indexGuess = geheimWoord.IndexOf(txtInput.Text.ToLower());
+                        string letter = Convert.ToString(geheimWoord[indexGuess]);
+                        verborgenWoordArray[indexGuess] = letter;
                         PrintUserOutPut(); 
                     }
                     else
@@ -61,7 +68,8 @@ namespace GalgjeWPF
                 {
                     if (txtInput.Text == geheimWoord)
                     {
-                        txtTextDisplay.Text = $"Je hebt het\nwoordje '{geheimWoord}' geraden!";
+                        txtTextDisplay.Text = $"Je hebt het woordje '{geheimWoord}' geraden!";
+                        btnRaad.Visibility = Visibility.Hidden;
                     }
                     else
                     {
@@ -74,7 +82,7 @@ namespace GalgjeWPF
             }
             else
             {
-                txtTextDisplay.Text = $"Oh spijtig, you lost :(\nBetter luck next time!";
+                txtTextDisplay.Text = $"Oh spijtig, you lost\n:( Better luck next time!";
                 btnRaad.Visibility = Visibility.Hidden;
             }
         }
@@ -92,10 +100,13 @@ namespace GalgjeWPF
             btnVerberg.Visibility = Visibility.Visible;
             txtInput.Visibility = Visibility.Visible;
             btnNieuwSpel.Visibility = Visibility.Hidden;
-            btnRaad.Visibility = Visibility.Hidden; 
+            btnRaad.Visibility = Visibility.Hidden;
+            txtWoord.Visibility = Visibility.Hidden;
             levens = 10;
             juisteLetters = "";
             fouteLetters = "";
+            txtWoord.Clear();
+
         }
 
         /// <summary>
@@ -110,12 +121,32 @@ namespace GalgjeWPF
         {
             geheimWoord = txtInput.Text.ToLower();
            
-
             btnRaad.Visibility = Visibility.Visible;
-
             btnVerberg.Visibility = Visibility.Hidden;
             btnNieuwSpel.Visibility = Visibility.Visible;
+
             PrintUserOutPut();
+            txtWoord.Visibility = Visibility.Visible;
+
+
+            string[] woordArray = new string[geheimWoord.Length];
+            string[] verborgenWoordArray = new string[geheimWoord.Length];
+
+
+            for (int i = 0; i < geheimWoord.Length; i++)
+            {
+                woordArray[i] = Convert.ToString(geheimWoord[i]);
+            }
+            for (int i = 0; i < geheimWoord.Length; i++)
+            {
+                verborgenWoordArray[i] = "_"; 
+            }
+            foreach (var item in verborgenWoordArray)
+            {
+                txtWoord.Text += item;
+            }
+
+
             txtInput.Clear();
         }
 
