@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using System.IO;
 
 namespace GalgjeWPF
 {
@@ -26,12 +28,13 @@ namespace GalgjeWPF
         private static string geheimWoord;
         private int levens = 10;
         string woordVerbergen;
-
+        Image[] afbeeldingStukjes;
         string[] woordArray = new string[0];
-        string[] verborgenWoordArray = new string[0];
+        string[] verborgenWoordArray;
         public MainWindow()
         {
             InitializeComponent();
+            afbeeldingStukjes = Afbeeldingen();
         }
         ///<Summary>
         ///Aanmaken van de Click-methode voor de 'RAAD' button.
@@ -51,9 +54,13 @@ namespace GalgjeWPF
                     {
                         juisteLetters = juisteLetters + txtInput.Text + ",";
                         int indexGuess = geheimWoord.IndexOf(txtInput.Text.ToLower());
-                        string letter = Convert.ToString(geheimWoord[indexGuess]);
-                        verborgenWoordArray[indexGuess] = letter;
-                        PrintUserOutPut(); 
+                        verborgenWoordArray[indexGuess] = txtInput.Text;
+                        txtWoord.Text = "";
+                        foreach (var item in verborgenWoordArray)
+                        {
+                            txtWoord.Text += Convert.ToString(item);
+                        }
+                        PrintUserOutPut();
                     }
                     else
                     {
@@ -129,8 +136,8 @@ namespace GalgjeWPF
             txtWoord.Visibility = Visibility.Visible;
 
 
-            string[] woordArray = new string[geheimWoord.Length];
-            string[] verborgenWoordArray = new string[geheimWoord.Length];
+            woordArray = new string[geheimWoord.Length];
+            verborgenWoordArray = new string[geheimWoord.Length];
 
 
             for (int i = 0; i < geheimWoord.Length; i++)
@@ -139,23 +146,78 @@ namespace GalgjeWPF
             }
             for (int i = 0; i < geheimWoord.Length; i++)
             {
-                verborgenWoordArray[i] = "_"; 
+                verborgenWoordArray[i] = "_ "; 
             }
             foreach (var item in verborgenWoordArray)
             {
                 txtWoord.Text += item;
             }
 
-
             txtInput.Clear();
         }
-
         ///<summary>Methode om de users output te printen in de textbox, methode aangemaakt voor dubbele code te voorkomen</summary>///
         private void PrintUserOutPut() 
         {
+            var foutenAantal = 10 - levens;
+            imageOutput.Children.Clear();
+            for (int i = 0; i < foutenAantal; ++i)
+            {
+
+                imageOutput.Children.Add(afbeeldingStukjes[i]);
+            }
             txtTextDisplay.Text = $"{levens} levens \n\r" +
                             $"Juiste letters: {juisteLetters}\n\r" +
                             $"Foute letters: {fouteLetters}";
+        }
+
+        private void btnRaad_MouseEnter(object sender, MouseEventArgs e)
+        {
+            
+            
+        }
+
+        private void btnRaad_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnRaad.BorderBrush = Brushes.Transparent;
+        }
+
+        private void btnNieuwSpel_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnNieuwSpel.BorderBrush = Brushes.Crimson;
+        }
+
+        private void btnNieuwSpel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnNieuwSpel.BorderBrush = Brushes.Transparent;
+
+        }
+
+        private void btnVerberg_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void btnVerberg_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private static Image[] Afbeeldingen() 
+        {
+            Debug.Assert(Directory.Exists("assets/assets")); // als de map niet bestaat crasht het programma
+            var arrayAfbeeldingen = new Image[10];
+            int i = 0;
+            foreach (var item in Directory.EnumerateFiles("assets/assets"))
+            {
+                var path = new Uri(item, UriKind.Relative);
+                var bitMap = new BitmapImage(path);
+
+                var image = new Image();
+                image.Source = bitMap;
+                arrayAfbeeldingen[i++] = image;
+            }
+            MessageBox.Show($"{i}");
+            return arrayAfbeeldingen;
         }
     }
 }
