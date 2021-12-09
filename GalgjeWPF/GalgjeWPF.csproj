@@ -95,37 +95,38 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assests\achtergrond.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="assets\layer-00.png">
+    <Resource Include="assests\Image02.jpg" />
+    <Resource Include="assests\Paper.jpg" />
+    <Resource Include="assests\Paper02.png" />
+    <Resource Include="assests\Paper03.png" />
+    <Content Include="assets\stuk01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\layer-01.png">
+    <Content Include="assets\stuk02.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\layer-02.png">
+    <Content Include="assets\stuk03.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\layer-03.png">
+    <Content Include="assets\stuk04.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\layer-04.png">
+    <Content Include="assets\stuk05.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\layer-05.png">
+    <Content Include="assets\stuk06.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\layer-06.png">
+    <Content Include="assets\stuk07.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\layer-07.png">
+    <Content Include="assets\stuk08.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\layer-08.png">
+    <Content Include="assets\stuk09.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\layer-09.png">
+    <Content Include="assets\stuk10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -11,8 +11,11 @@
     MinWidth="800"
     MinHeight="500"
     mc:Ignorable="d">
-    <DockPanel LastChildFill="True">
+    <DockPanel
+        Name="dockPanel"
+        LastChildFill="True">
         <Grid DockPanel.Dock="Right">
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
@@ -24,29 +27,20 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
+            <Grid.Background>
+                <ImageBrush Stretch="UniformToFill" ImageSource="/assests/Image02.jpg">
+                </ImageBrush>
+            </Grid.Background>
             <Image
                 Grid.RowSpan="4"
                 Grid.ColumnSpan="2"
-                Source="assests/achtergrond.jpg"
                 Stretch="UniformToFill" />
-            <TextBox
-                Name="txtTextDisplay"
-                Grid.Row="1"
-                Grid.RowSpan="2"
-                Grid.Column="1"
-                Margin="20"
-                HorizontalAlignment="Center"
-                Background="Transparent"
-                BorderThickness="0"
-                FontSize="20"
-                Foreground="Crimson"
-                TextWrapping="Wrap">
-                Start een nieuw spel
-            </TextBox>
+            
             <TextBox
                 Name="txtInput"
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="0"
                 Height="70"
                 Margin="150,20,0,10"
@@ -63,59 +57,116 @@
                 Grid.Column="0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                Background="Black"
                 FontSize="40"
                 Foreground="Crimson"
-                Background="Black"
                 TextAlignment="Center"
-                Visibility="Hidden">
-            </TextBox>
-            <Button
+                Visibility="Hidden" />
+            <Label
                 Name="btnRaad"
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="1"
-                Height="70"
-                Margin="60,20"
+                Margin="40,20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
                 Background="Black"
-                Click="btnRaad_Click"
+                BorderBrush="Crimson"
+                BorderThickness="4"
+                Cursor="Hand"
                 FontSize="20"
                 Foreground="Crimson"
-                Visibility="Hidden"
-                MouseEnter="btnRaad_MouseEnter"
-                MouseLeave="btnRaad_MouseLeave">
+                MouseDown="btnRaad_Click"
+                MouseEnter="btnAll_MouseEnter"
+                MouseLeave="btnAll_MouseLeave"
+                Visibility="Hidden">
                 Raad
-            </Button>
-            <Button
+            </Label>
+
+
+            <Label
                 Name="btnNieuwSpel"
-                BorderThickness="4"
-                BorderBrush="Black"
                 Grid.Row="0"
                 Grid.Column="1"
-                Height="70"
-                Margin="60,20"
+                Margin="50,20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
                 Background="Black"
-                Click="btnNieuwSpel_Click"
+                BorderBrush="Crimson"
+                BorderThickness="4"
+                Cursor="Hand"
                 FontSize="20"
                 Foreground="Crimson"
-                MouseEnter="btnNieuwSpel_MouseEnter"
-                MouseLeave="btnNieuwSpel_MouseLeave">
+                MouseDown="btnNieuwSpel_Click"
+                MouseEnter="btnAll_MouseEnter"
+                MouseLeave="btnAll_MouseLeave">
                 Nieuw Spel
-            </Button>
-            <Button
+            </Label>
+            <Label
                 Name="btnVerberg"
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="1"
-                Height="70"
-                Margin="60,20"
+                Margin="50,20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
                 Background="Black"
-                Click="btnVerberg_Click"
+                BorderBrush="Crimson"
+                BorderThickness="4"
+                Cursor="Hand"
                 FontSize="20"
                 Foreground="Crimson"
-                MouseEnter="btnVerberg_MouseEnter"
-                MouseLeave="btnVerberg_MouseLeave">
+                MouseDown="btnVerberg_Click"
+                MouseEnter="btnAll_MouseEnter"
+                MouseLeave="btnAll_MouseLeave">
                 Verberg woord
-            </Button>
-            <Grid Name="imageOutput" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
+            </Label>
+            <TextBox
+                Name="lblTimer"
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Background="Black"
+                FontSize="40"
+                Foreground="Crimson"
+                Visibility="Hidden" />
+            <TextBox
+                Name="txtTijdOp"
+                Grid.Row="3"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="Red"
+                BorderThickness="0"
+                FontSize="50px"
+                Foreground="Black"
+                TextWrapping="Wrap"
+                Visibility="Hidden" />
+            <Grid
+                Name="imageOutput"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="0" />
+            <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
+                <Grid.Background >
+                    <ImageBrush Stretch="fill" ImageSource="/assests/Paper01.png" />
+ 
+                </Grid.Background>
             </Grid>
+            <TextBox
+                Name="txtTextDisplay"
+                Grid.Row="1"
+                Grid.RowSpan="3"
+                Grid.Column="1"
+                Margin="20"
+                Padding="10 30"
+                HorizontalAlignment="Center"
+                Background="Transparent"
+                BorderThickness="0"
+                FontSize="15"
+                Foreground="Black"
+                TextWrapping="Wrap">
+                Start een nieuw spel
+            </TextBox>
         </Grid>
     </DockPanel>
 </Window>
