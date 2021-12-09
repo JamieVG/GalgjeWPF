@@ -61,7 +61,8 @@ namespace GalgjeWPF
             seconden = 11;
             dockPanel.Background = Brushes.Transparent;
             timer.Start();
-
+            imageOutput.Visibility = Visibility.Visible;
+         
             if (levens != 0)
             {
                 if (txtInput.Text.Length == 1)
@@ -195,6 +196,9 @@ namespace GalgjeWPF
             btnRaad.Visibility = Visibility.Hidden;
             timer.Stop();
             lblTimer.Visibility = Visibility.Hidden;
+            txtWoord.Visibility = Visibility.Hidden;
+            txtInput.Visibility = Visibility.Hidden;
+            imageOutput.Visibility = Visibility.Hidden;
 
         }
         private void YouLose() 
