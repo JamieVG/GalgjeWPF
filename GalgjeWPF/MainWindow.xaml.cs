@@ -34,11 +34,16 @@ namespace GalgjeWPF
         string[] verborgenWoordArray;
         int seconden;
         private DispatcherTimer timer = new DispatcherTimer();
+        private static Color red = new Color();
         public MainWindow()
         {
             InitializeComponent();
             afbeeldingStukjes = Afbeeldingen();
-            TimerAanmaken();            
+            TimerAanmaken();
+            red.R = 181;
+            red.G = 20;
+            red.B = 36;
+            red.A = 90;
         }
 
         
@@ -54,7 +59,7 @@ namespace GalgjeWPF
         private void btnRaad_Click(object sender, RoutedEventArgs e)
         {
             seconden = 11;
-            dockPanel.Background = Brushes.Black;
+            dockPanel.Background = Brushes.Transparent;
             timer.Start();
 
             if (levens != 0)
@@ -204,7 +209,8 @@ namespace GalgjeWPF
         private void FouteGok() 
         {
             levens--;
-            dockPanel.Background = Brushes.Red;
+            dockPanel.Background = new SolidColorBrush(red);
+                      
         }
 
 
@@ -320,14 +326,17 @@ namespace GalgjeWPF
                 seconden = 11;
                 PrintUserOutPut();
                 timer.Start();
-                dockPanel.Background = Brushes.Black;
+                dockPanel.Background = Brushes.Transparent;
 
             }
             if (seconden == 0)
             {
-                dockPanel.Background = Brushes.Red;
+                dockPanel.Background = new SolidColorBrush(red);
                 txtTijdOp.Visibility = Visibility.Visible;
-                txtTijdOp.Text = "Je tijd is op!";
+                txtTijdOp2.Visibility = Visibility.Visible;
+
+                txtTijdOp.Text = "Too Slow";
+                txtTijdOp2.Text = "B*TCH";
                 
 
             }
@@ -339,7 +348,8 @@ namespace GalgjeWPF
             {
                 txtTijdOp.Text = "";
                 txtTijdOp.Visibility = Visibility.Hidden;
-                dockPanel.Background = Brushes.Black;
+                txtTijdOp2.Visibility = Visibility.Hidden;
+                dockPanel.Background = Brushes.Transparent;
             }
             seconden--;
 

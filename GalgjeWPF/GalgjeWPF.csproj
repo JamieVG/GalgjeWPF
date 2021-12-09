@@ -96,9 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assests\Image02.jpg" />
-    <Resource Include="assests\Paper.jpg" />
-    <Resource Include="assests\Paper02.png" />
-    <Resource Include="assests\Paper03.png" />
+    <Resource Include="assests\Paper01.png" />
     <Content Include="assets\stuk01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
