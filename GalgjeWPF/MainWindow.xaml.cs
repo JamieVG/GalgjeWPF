@@ -208,6 +208,8 @@ namespace GalgjeWPF
             lblTimer.Visibility = Visibility.Hidden;
             btnRaad.Visibility = Visibility.Hidden;
             txtWoord.Visibility = Visibility.Hidden;
+            txtInput.Visibility = Visibility.Hidden;
+            imageOutput.Visibility = Visibility.Hidden;
         }
 
         private void FouteGok() 
@@ -251,9 +253,7 @@ namespace GalgjeWPF
             btnRaad.Visibility = Visibility.Hidden;
             txtWoord.Visibility = Visibility.Hidden;
             lblTimer.Visibility = Visibility.Hidden;
-
-
-
+            imageOutput.Visibility = Visibility.Visible;
         }
         private void JuisteLettersTonen() 
         {
@@ -274,13 +274,13 @@ namespace GalgjeWPF
         {
             Label lbl = (Label)sender;
             
-            lbl.BorderBrush = Brushes.Yellow;
+            lbl.BorderBrush = Brushes.SaddleBrown;
         }
 
         private void btnAll_MouseLeave(object sender, MouseEventArgs e)
         {
             Label lbl = (Label)sender;
-            lbl.BorderBrush = Brushes.Crimson;
+            lbl.BorderBrush = Brushes.Black;
         }
 
 

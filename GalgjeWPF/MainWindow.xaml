@@ -12,9 +12,12 @@
     MinHeight="500"
     mc:Ignorable="d">
     <Window.Background>
-        <ImageBrush ImageSource="/assests/Image02.jpg"></ImageBrush>
+        <ImageBrush ImageSource="/assests/Image02.jpg" />
     </Window.Background>
-    <DockPanel Background="Transparent" Name="dockPanel" LastChildFill="True">
+    <DockPanel
+        Name="dockPanel"
+        Background="Transparent"
+        LastChildFill="True">
         <Grid DockPanel.Dock="Right">
 
             <Grid.ColumnDefinitions>
@@ -31,37 +34,40 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            
+
             <TextBox
                 Name="txtInput"
                 Grid.Row="4"
                 Grid.Column="0"
                 Height="70"
-                Margin="20 20 20 20"
+                Margin="20,20,20,20"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 FontSize="40"
-                Foreground="Crimson"
-                TextAlignment="Center">
+                FontWeight="Bold"
+                Foreground="Black"
+                TextAlignment="Center"
+                Visibility="Hidden">
                 <TextBox.Background>
-                    <SolidColorBrush Color="White" Opacity="0.3"/>
+                    <SolidColorBrush Opacity="0.8" Color="White" />
                 </TextBox.Background>
             </TextBox>
             <TextBox
                 Name="txtWoord"
                 Grid.Row="4"
                 Grid.Column="1"
-                Margin="0 0 20 0"
+                Margin="0,0,20,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Visibility="Hidden"
                 FontSize="40"
-                Foreground="Crimson"
+                FontWeight="Bold"
+                Foreground="Black"
                 TextAlignment="Center"
-                >
+                Visibility="Hidden">
                 <TextBox.Background>
-                    <SolidColorBrush Color="Black" Opacity="0.3"/>
-                </TextBox.Background> </TextBox>
+                    <SolidColorBrush Opacity="0.8" Color="White" />
+                </TextBox.Background>
+            </TextBox>
             <Label
                 Name="btnRaad"
                 Grid.Row="4"
@@ -69,19 +75,19 @@
                 Margin="40,20"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                Background="Black"
-                BorderBrush="Crimson"
+                Background="SandyBrown"
+                BorderBrush="Black"
                 BorderThickness="4"
                 Cursor="Hand"
                 FontSize="20"
-                Foreground="Crimson"
+                FontWeight="Bold"
+                Foreground="Black"
                 MouseDown="btnRaad_Click"
                 MouseEnter="btnAll_MouseEnter"
                 MouseLeave="btnAll_MouseLeave"
                 Visibility="Hidden">
                 Raad
             </Label>
-
 
             <Label
                 Name="btnNieuwSpel"
@@ -90,12 +96,13 @@
                 Margin="50,20"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                Background="Black"
-                BorderBrush="Crimson"
+                Background="SandyBrown"
+                BorderBrush="Black"
                 BorderThickness="4"
                 Cursor="Hand"
                 FontSize="20"
-                Foreground="Crimson"
+                FontWeight="Bold"
+                Foreground="Black"
                 MouseDown="btnNieuwSpel_Click"
                 MouseEnter="btnAll_MouseEnter"
                 MouseLeave="btnAll_MouseLeave">
@@ -105,18 +112,20 @@
                 Name="btnVerberg"
                 Grid.Row="4"
                 Grid.Column="2"
-                Margin="0 0 0 25"
+                Margin="0,0,0,25"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                Background="Black"
-                BorderBrush="Crimson"
+                Background="SandyBrown"
+                BorderBrush="Black"
                 BorderThickness="4"
                 Cursor="Hand"
                 FontSize="20"
-                Foreground="Crimson"
+                FontWeight="Bold"
+                Foreground="Black"
                 MouseDown="btnVerberg_Click"
                 MouseEnter="btnAll_MouseEnter"
-                MouseLeave="btnAll_MouseLeave">
+                MouseLeave="btnAll_MouseLeave"
+                Visibility="Hidden">
                 Verberg woord
             </Label>
             <TextBox
@@ -126,36 +135,37 @@
                 Margin="10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Background="Black"
+                Background="SandyBrown"
                 FontSize="40"
-                Foreground="Crimson"
+                FontWeight="Bold"
+                Foreground="Black"
                 Visibility="Hidden" />
             <TextBox
                 Name="txtTijdOp"
                 Grid.Row="1"
-                Grid.Column="1"
                 Grid.RowSpan="2"
+                Grid.Column="1"
+                Margin="20,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Margin="20 0"
+                Background="Transparent"
                 BorderThickness="0"
                 FontSize="60"
-                Background="Transparent"
-                Foreground="Blue"
+                Foreground="DarkBlue"
                 TextWrapping="Wrap"
                 Visibility="Hidden" />
             <TextBox
                 Name="txtTijdOp2"
                 Grid.Row="2"
-                Grid.Column="1"
                 Grid.RowSpan="2"
+                Grid.Column="1"
+                Margin="20,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Margin="20 0"
+                Background="Transparent"
                 BorderThickness="0"
                 FontSize="60"
-                Background="Transparent"
-                Foreground="Blue"
+                Foreground="DarkBlue"
                 TextWrapping="Wrap"
                 Visibility="Hidden" />
             <Grid
@@ -172,6 +182,7 @@
 
                 </Grid.Background>
             </Grid>
+
             <TextBox
                 Name="txtTextDisplay"
                 Grid.Row="1"
