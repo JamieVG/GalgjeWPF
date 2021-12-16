@@ -32,9 +32,143 @@ namespace GalgjeWPF
         Image[] afbeeldingStukjes;
         string[] woordArray = new string[0];
         string[] verborgenWoordArray;
+        string hintLetter;
         int seconden;
         private DispatcherTimer timer = new DispatcherTimer();
         private static Color red = new Color();
+        private static int indexRandomWoord;
+        private static string[] letters = new string[]
+        {
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h",
+            "i",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "q",
+            "y",
+            "z"
+        };
+        private string[] galgjeWoorden = new string[]
+        {
+            "grafeem",
+            "tjiftjaf",
+            "maquette",
+            "kitsch",
+            "pochet",
+            "convocaat",
+            "jakkeren",
+            "collaps",
+            "zuivel",
+            "cesium",
+            "voyant",
+            "spitten",
+            "pancake",
+            "gietlepel",
+            "karwats",
+            "dehydreren",
+            "viswijf",
+            "flater",
+            "cretonne",
+            "sennhut",
+            "tichel",
+            "wijten",
+            "cadeau",
+            "trotyl",
+            "chopper",
+            "pielen",
+            "vigeren",
+            "vrijuit",
+            "dimorf",
+            "kolchoz",
+            "janhen",
+            "plexus",
+            "borium",
+            "ontweien",
+            "quiche",
+            "ijverig",
+            "mecenaat",
+            "falset",
+            "telexen",
+            "hieruit",
+            "femelaar",
+            "cohesie",
+            "exogeen",
+            "plebejer",
+            "opbouw",
+            "zodiak",
+            "volder",
+            "vrezen",
+            "convex",
+            "verzenden",
+            "ijstijd",
+            "fetisj",
+            "gerekt",
+            "necrose",
+            "conclaaf",
+            "clipper",
+            "poppetjes",
+            "looikuip",
+            "hinten",
+            "inbreng",
+            "arbitraal",
+            "dewijl",
+            "kapzaag",
+            "welletjes",
+            "bissen",
+            "catgut",
+            "oxymoron",
+            "heerschaar",
+            "ureter",
+            "kijkbuis",
+            "dryade",
+            "grofweg",
+            "laudanum",
+            "excitatie",
+            "revolte",
+            "heugel",
+            "geroerd",
+            "hierbij",
+            "glazig",
+            "pussen",
+            "liquide",
+            "aquarium",
+            "formol",
+            "kwelder",
+            "zwager",
+            "vuldop",
+            "halfaap",
+            "hansop",
+            "windvaan",
+            "bewogen",
+            "vulstuk",
+            "efemeer",
+            "decisief",
+            "omslag",
+            "prairie",
+            "schuit",
+            "weivlies",
+            "ontzeggen",
+            "schijn",
+            "sousafoon"
+        };
         public MainWindow()
         {
             InitializeComponent();
@@ -59,7 +193,7 @@ namespace GalgjeWPF
         private void btnRaad_Click(object sender, RoutedEventArgs e)
         {
             seconden = 11;
-            dockPanel.Background = Brushes.Transparent;
+            dockPanelTweeSpelers.Background = Brushes.Transparent;
             timer.Start();
             imageOutput.Visibility = Visibility.Visible;
          
@@ -78,6 +212,7 @@ namespace GalgjeWPF
                         }
                         JuisteLettersTonen();
                         txtWoord.Text = "";
+                        txtRandomWoord.Text = "";
                         PrintenMask();
                         PrintUserOutPut();
                         if (String.Join("",verborgenWoordArray) == String.Join("",woordArray))
@@ -153,7 +288,9 @@ namespace GalgjeWPF
         }
 
 
-
+        //<summary>
+        // Aanmaken methodie die Visibility changed als je op de knop drukt
+        //</summary>
         private void VerbergClickVisibility() 
         {
             btnRaad.Visibility = Visibility.Visible;
@@ -161,8 +298,14 @@ namespace GalgjeWPF
             btnNieuwSpel.Visibility = Visibility.Visible;
             txtWoord.Visibility = Visibility.Visible;
             lblTimer.Visibility = Visibility.Visible;
+            mnuTimer.Visibility = Visibility.Hidden;
         }
 
+        //<summary>
+        // Methode voor het aanmaken van 2 arrays, en het printen van de mask. 
+        // 1) elke index van woordArray vullen met elke letter van het geheimwoord & 
+        // 2) verborgenwoordArray is het mask van het woord
+        //</summary>
         private void AanmakenMaskArray() 
         {
             woordArray = new string[geheimWoord.Length];
@@ -180,27 +323,41 @@ namespace GalgjeWPF
             foreach (var item in verborgenWoordArray)
             {
                 txtWoord.Text += item;
+                txtRandomWoord.Text += item;
             }
         }
+        // Methode die het mask aanpast
         private void PrintenMask()
         {
             foreach (var item in verborgenWoordArray)
             {
                 txtWoord.Text += Convert.ToString(item);
+                txtRandomWoord.Text += Convert.ToString(item);
             }
         }
 
+        // Methode die staat voor de uitkomst 'Victory'
+        // Message dat de speler het juist heeft geraden
+        // Timer stopt
+        // Visibility functionaliteiten
         private void YouWin() 
         {
             txtTextDisplay.Text = $"Je hebt het woordje '{geheimWoord}' geraden!";
-            btnRaad.Visibility = Visibility.Hidden;
             timer.Stop();
             lblTimer.Visibility = Visibility.Hidden;
             txtWoord.Visibility = Visibility.Hidden;
             txtInput.Visibility = Visibility.Hidden;
             imageOutput.Visibility = Visibility.Hidden;
+            btnRaad.Visibility = Visibility.Hidden;
 
+            lblNaamBevestigen.Visibility = Visibility.Visible;
+            lblText.Visibility = Visibility.Visible;
+            txtBevestigNaam.Visibility = Visibility.Visible;
         }
+        // Methode die staat voor de uitkomst 'You lose'
+        // Message dat de speler het juist heeft geraden
+        // Timer stopt
+        // Visibility functionaliteiten
         private void YouLose() 
         {
             txtTextDisplay.Text = $"Oh spijtig, you lost\n:( Better luck next time!";
@@ -210,18 +367,27 @@ namespace GalgjeWPF
             txtWoord.Visibility = Visibility.Hidden;
             txtInput.Visibility = Visibility.Hidden;
             imageOutput.Visibility = Visibility.Hidden;
+            txtRandomWoord.Visibility = Visibility.Hidden;
         }
 
+        // Methode die een leven aftrekt bij foute gok en de achtergrond veranderd naar rood
         private void FouteGok() 
         {
             levens--;
-            dockPanel.Background = new SolidColorBrush(red);
+            dockPanelTweeSpelers.Background = new SolidColorBrush(red);
                       
+        }
+        // Methode voor message als tijd op is
+        private void ToSlow() 
+        {
+            txtTijdOp.Text = "Too Slow";
+            txtTijdOp2.Text = "B*TCH";
         }
 
 
 
-        ///<summary>Methode om de users output te printen in de textbox, methode aangemaakt voor dubbele code te voorkomen</summary>///
+        ///<summary>Methode om de users output te printen in, en de galg indien ze fout gokken
+        /// </summary>///
         private void PrintUserOutPut()
         {
             var foutenAantal = 10 - levens;
@@ -234,32 +400,48 @@ namespace GalgjeWPF
                             $"Juiste letters: {juisteLetters}\n\r" +
                             $"Foute letters: {fouteLetters}";
         }
+        // methode die alle code bevat om een nieuw spel te starten
+        // alles resetten naar nieuwe waardes
+        // visibility functionaliteit aanpassen als er op de knop word gedrukt
         private void ResetAllNewButton() 
         {
             juisteLetters = "";
             fouteLetters = "";
             levens = 10;
             txtWoord.Clear();
+            txtRandomWoord.Clear();
             imageOutput.Children.Clear();
 
             timer.Stop();
             TimerReset();
 
             txtTextDisplay.Text = "Geef een geheim woord in";
-
-            btnVerberg.Visibility = Visibility.Visible;
-            txtInput.Visibility = Visibility.Visible;
+            dockPanelTweeSpelers.Visibility = Visibility.Hidden;
+            dockPanelStart.Visibility = Visibility.Visible;
             btnNieuwSpel.Visibility = Visibility.Hidden;
-            btnRaad.Visibility = Visibility.Hidden;
             txtWoord.Visibility = Visibility.Hidden;
             lblTimer.Visibility = Visibility.Hidden;
             imageOutput.Visibility = Visibility.Visible;
+            btnRaad.Visibility = Visibility.Hidden;
+            btnVerberg.Visibility = Visibility.Visible;
+            txtRandomWoord.Visibility = Visibility.Hidden;
+            mnuTimer.Visibility = Visibility.Visible;
+
+
+
+
+
+
         }
+
+        // Methode voor printen van juiste letters
         private void JuisteLettersTonen() 
         {
             juisteLetters = juisteLetters + txtInput.Text + ",";
 
         }
+
+        //Methode voor printen van foute letters
         private void FouteLettersTonen() 
         {
             fouteLetters = fouteLetters + txtInput.Text + ",";
@@ -268,7 +450,7 @@ namespace GalgjeWPF
 
 
 
-        // Mouse enter and leave events
+        // Mouse Enter & Leave events om border van kleur te veranderen van alle knoppen
 
         private void btnAll_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -286,7 +468,7 @@ namespace GalgjeWPF
 
 
 
-        // galg opbouwen
+        // Methode om galg opbouwen
 
         private static Image[] Afbeeldingen()
         {
@@ -306,13 +488,18 @@ namespace GalgjeWPF
         }
 
 
-        //timer event
+        //Methode  voor de timer in te stellen
         private void TimerAanmaken() 
         {
-            timer.Interval = new TimeSpan(0, 0, 1); // 0, 0, 1 = uur minuten seconden
+            timer.Interval = new TimeSpan(0, 0, 1); 
             timer.Tick += TimerTick;
             seconden = 10;
         }
+        //TimerTick event 
+        // Eerste if : als de timer op 11 komt dan display '10', zo lijkt het dat de timer wacht
+        // Tweede if : als de timer op -1 komt stopt die met tellen en displayed 10 voor de timer te pauzeren
+        // Derde if : Als timer op 0 komt dan verander de background en komt er een Message dat de tijd op is
+        // Vierde if : Als de timer op 10 kom of 11 kmot dan word de message verwijderd 
         private void TimerTick(object sender, EventArgs e)
         {
             lblTimer.Text = seconden.ToString();
@@ -330,18 +517,16 @@ namespace GalgjeWPF
                 seconden = 11;
                 PrintUserOutPut();
                 timer.Start();
-                dockPanel.Background = Brushes.Transparent;
+                dockPanelTweeSpelers.Background = Brushes.Transparent;
 
             }
             if (seconden == 0)
             {
-                dockPanel.Background = new SolidColorBrush(red);
+                dockPanelTweeSpelers.Background = new SolidColorBrush(red);
                 txtTijdOp.Visibility = Visibility.Visible;
                 txtTijdOp2.Visibility = Visibility.Visible;
 
-                txtTijdOp.Text = "Too Slow";
-                txtTijdOp2.Text = "B*TCH";
-                
+                ToSlow();        
 
             }
             if (levens == 0)
@@ -350,19 +535,127 @@ namespace GalgjeWPF
             }
             if (seconden == 10 || seconden == 11)
             {
-                txtTijdOp.Text = "";
                 txtTijdOp.Visibility = Visibility.Hidden;
                 txtTijdOp2.Visibility = Visibility.Hidden;
-                dockPanel.Background = Brushes.Transparent;
+                dockPanelTweeSpelers.Background = Brushes.Transparent;
             }
             seconden--;
 
         }
+        //methode om de seconden terug te resetten
         private void TimerReset() 
         {
             seconden = 10;
         }
 
-       
+        
+
+        private void lblTweeSpelers_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            dockPanelTweeSpelers.Visibility = Visibility.Visible;
+            dockPanelStart.Visibility = Visibility.Hidden;
+            txtTextDisplay.Visibility = Visibility.Visible;
+            txtInput.Visibility = Visibility.Visible;
+
+            txtTextDisplay.Text = "Start een nieuw spel door een woord te verbergen. Ook kan je de tijd tussen een beurt instellen";
+        }
+
+        private void lblSinglePlayer_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtTextDisplay.Text = "Start een nieuw spel door op de 'Start' button te drukken. Ook kan je de tijd tussen een beurt instellen";
+            dockPanelStart.Visibility = Visibility.Hidden;
+            dockPanelTweeSpelers.Visibility = Visibility.Visible;
+            txtTextDisplay.Visibility = Visibility.Visible;
+            btnVerberg.Visibility = Visibility.Hidden;
+            btnStartSinglePlayer.Visibility = Visibility.Visible;
+            txtInput.Visibility = Visibility.Hidden;
+
+
+        }
+
+        private void Timer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void lblNaamBevestigen_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            string naam = txtBevestigNaam.Text;
+            txtBevestigNaam.Visibility = Visibility.Hidden;
+            lblNaamBevestigen.Visibility = Visibility.Hidden;
+            lblText.Visibility = Visibility.Hidden;
+            
+            
+        }
+
+        private void btnStartSinglePlayer_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtInput.Visibility = Visibility.Visible;
+            lblTimer.Visibility = Visibility.Visible;
+            txtRandomWoord.Visibility = Visibility.Visible;
+            btnStartSinglePlayer.Visibility = Visibility.Hidden;
+            btnRaad.Visibility = Visibility.Visible;
+            btnNieuwSpel.Visibility = Visibility.Visible;
+            mnuTimer.Visibility = Visibility.Hidden;
+
+            NewRandomWord();
+            PrintUserOutPut();
+
+            AanmakenMaskArray();
+
+            txtInput.Clear();
+
+
+            lblTimer.Text = seconden.ToString();
+            timer.Start();
+        }
+
+        private void NewRandomWord() 
+        {
+            Random random = new Random();
+            indexRandomWoord = random.Next(0,galgjeWoorden.Length);
+            geheimWoord = galgjeWoorden[indexRandomWoord];
+        }
+
+        private void Afsluiten_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void NieuwSpel_Click(object sender, RoutedEventArgs e)
+        {
+            ResetAllNewButton();
+        }
+
+        private void Hint_Click(object sender, RoutedEventArgs e)
+        {
+            Random random = new Random();
+            hintLetter = letters[random.Next(0, letters.Length)];
+
+            if (geheimWoord.Contains(hintLetter))
+            {
+                hintLetter = letters[random.Next(0, letters.Length)];
+            }
+            else if (fouteLetters.Contains(hintLetter))
+            {
+
+            }
+            else if (String.IsNullOrEmpty(fouteLetters) && !geheimWoord.Contains(hintLetter))
+            {
+                HintLetterFout();
+            }
+            else
+            {
+
+                HintLetterFout();
+            }
+          
+        }
+        private void HintLetterFout() 
+        {
+            fouteLetters += hintLetter;
+            MessageBox.Show($"Geheimwoord bevat NIET de volgende letter: {hintLetter}");
+        }
     }
+
 }
