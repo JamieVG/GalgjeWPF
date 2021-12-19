@@ -34,9 +34,12 @@ namespace GalgjeWPF
         string[] verborgenWoordArray;
         string hintLetter;
         int seconden;
+        int winnaarLevens;
+        string naam;
         private DispatcherTimer timer = new DispatcherTimer();
         private static Color red = new Color();
         private static int indexRandomWoord;
+        private bool askedForHint;
         private static string[] letters = new string[]
         {
             "a",
@@ -350,9 +353,13 @@ namespace GalgjeWPF
             imageOutput.Visibility = Visibility.Hidden;
             btnRaad.Visibility = Visibility.Hidden;
 
-            lblNaamBevestigen.Visibility = Visibility.Visible;
-            lblText.Visibility = Visibility.Visible;
-            txtBevestigNaam.Visibility = Visibility.Visible;
+            if (askedForHint == false)
+            {
+                lblNaamBevestigen.Visibility = Visibility.Visible;
+                lblText.Visibility = Visibility.Visible;
+                txtBevestigNaam.Visibility = Visibility.Visible;
+            }
+            
         }
         // Methode die staat voor de uitkomst 'You lose'
         // Message dat de speler het juist heeft geraden
@@ -423,9 +430,10 @@ namespace GalgjeWPF
             lblTimer.Visibility = Visibility.Hidden;
             imageOutput.Visibility = Visibility.Visible;
             btnRaad.Visibility = Visibility.Hidden;
-            btnVerberg.Visibility = Visibility.Visible;
             txtRandomWoord.Visibility = Visibility.Hidden;
             mnuTimer.Visibility = Visibility.Visible;
+            btnStartSinglePlayer.Visibility = Visibility.Hidden;
+            
 
 
 
@@ -547,7 +555,11 @@ namespace GalgjeWPF
         {
             seconden = 10;
         }
-
+        private void DateTimeNow() 
+        {
+            DateTime dag = new DateTime(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            string moment =  dag.ToString();
+        }
         
 
         private void lblTweeSpelers_MouseDown(object sender, MouseButtonEventArgs e)
@@ -556,6 +568,8 @@ namespace GalgjeWPF
             dockPanelStart.Visibility = Visibility.Hidden;
             txtTextDisplay.Visibility = Visibility.Visible;
             txtInput.Visibility = Visibility.Visible;
+            btnVerberg.Visibility = Visibility.Visible;
+            imgHighScore.Visibility = Visibility.Hidden;
 
             txtTextDisplay.Text = "Start een nieuw spel door een woord te verbergen. Ook kan je de tijd tussen een beurt instellen";
         }
@@ -569,6 +583,8 @@ namespace GalgjeWPF
             btnVerberg.Visibility = Visibility.Hidden;
             btnStartSinglePlayer.Visibility = Visibility.Visible;
             txtInput.Visibility = Visibility.Hidden;
+            imgHighScore.Visibility = Visibility.Hidden;
+
 
 
         }
@@ -580,14 +596,24 @@ namespace GalgjeWPF
 
         private void lblNaamBevestigen_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            string naam = txtBevestigNaam.Text;
+            naam = txtBevestigNaam.Text;
+            winnaarLevens = levens;
             txtBevestigNaam.Visibility = Visibility.Hidden;
             lblNaamBevestigen.Visibility = Visibility.Hidden;
             lblText.Visibility = Visibility.Hidden;
-            
-            
-        }
 
+            StringBuilder highscoreOutput = new StringBuilder();
+            int levensVerloren = 10 - winnaarLevens;
+            DateTime dag = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            string uren = dag.Hour.ToString();
+            string minuten = dag.Minute.ToString();
+            string seconden = dag.Second.ToString();
+
+            txtHighScore.Text += highscoreOutput.AppendLine($"{naam} - {levensVerloren} ({uren}:{minuten}:{seconden})").ToString();
+
+
+        }
+        // controle button voor de single player
         private void btnStartSinglePlayer_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtInput.Visibility = Visibility.Visible;
@@ -597,6 +623,7 @@ namespace GalgjeWPF
             btnRaad.Visibility = Visibility.Visible;
             btnNieuwSpel.Visibility = Visibility.Visible;
             mnuTimer.Visibility = Visibility.Hidden;
+            
 
             NewRandomWord();
             PrintUserOutPut();
@@ -629,32 +656,41 @@ namespace GalgjeWPF
 
         private void Hint_Click(object sender, RoutedEventArgs e)
         {
-            Random random = new Random();
-            hintLetter = letters[random.Next(0, letters.Length)];
+            askedForHint = true;
+            
 
-            if (geheimWoord.Contains(hintLetter))
-            {
-                hintLetter = letters[random.Next(0, letters.Length)];
-            }
-            else if (fouteLetters.Contains(hintLetter))
+            if (!String.IsNullOrWhiteSpace(geheimWoord))
             {
 
-            }
-            else if (String.IsNullOrEmpty(fouteLetters) && !geheimWoord.Contains(hintLetter))
-            {
-                HintLetterFout();
-            }
-            else
-            {
+                askedForHint = true;
 
-                HintLetterFout();
+                List<char> geheimWoordList = geheimWoord.ToList();
+                List<char> alfabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToLower().ToList();
+                List<char> overgeblevenLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToLower().ToList();
+
+                for (int i = 0; i < geheimWoordList.Count; i++)
+                {
+                    for (int y = 0; y < alfabet.Count; y++)
+                    {
+                        if (geheimWoordList[i] == alfabet[y])
+                        {
+                            var chr = alfabet[y];
+                            overgeblevenLetters.Remove(chr);
+                        }
+                    }
+                }
+                Random random = new Random();
+                hintLetter = overgeblevenLetters[random.Next(0, overgeblevenLetters.Count)].ToString();
+                fouteLetters += hintLetter;
+                MessageBox.Show($"De letter die ZEKER NIET voorkomt in het geheimwoord is: {hintLetter} ", "HINT");
             }
-          
+
         }
-        private void HintLetterFout() 
-        {
-            fouteLetters += hintLetter;
-            MessageBox.Show($"Geheimwoord bevat NIET de volgende letter: {hintLetter}");
+       
+        private void HighScore_Click(object sender, RoutedEventArgs e)
+        {    
+            imgHighScore.Visibility = Visibility.Visible;
+            txtHighScore.Visibility = Visibility.Visible;
         }
     }
 

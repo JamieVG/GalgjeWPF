@@ -20,10 +20,13 @@
             <RowDefinition Height="20*" />
         </Grid.RowDefinitions>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Name="mnuTimer" Click="Timer_Click" Header="Timer instellen" />
+            <MenuItem
+                Name="mnuTimer"
+                Click="Timer_Click"
+                Header="Timer instellen" />
             <MenuItem Click="Hint_Click" Header="Hint" />
             <MenuItem Click="NieuwSpel_Click" Header="Nieuw Spel" />
-            <MenuItem Header="Highscores" />
+            <MenuItem Click="HighScore_Click" Header="Highscores" />
             <MenuItem Click="Afsluiten_Click" Header="Afsluiten" />
 
         </Menu>
@@ -83,7 +86,34 @@
                         MouseEnter="btnAll_MouseEnter"
                         MouseLeave="btnAll_MouseLeave"
                         Visibility="Visible" />
+                    <Grid
+                    Name="imgHighScore"
+                    Grid.Row="1"
+                    Grid.RowSpan="3"
+                    Grid.Column="0"
+                    Visibility="Hidden">
 
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/assests/Paper01.png" Stretch="fill" />
+
+                        </Grid.Background>
+                    </Grid>
+                    <TextBox
+                    Name="txtHighScore"
+                    Grid.Row="1"
+                    Grid.RowSpan="3"
+                    Grid.Column="0"
+                    Margin="20,50"
+                    Padding="10,30"
+                    HorizontalAlignment="Center"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap"
+                    Visibility="Hidden" />
                 </Grid>
             </DockPanel>
         </Grid>
@@ -138,6 +168,22 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="40"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    TextAlignment="Center"
+                    Visibility="Hidden">
+                    <TextBox.Background>
+                        <SolidColorBrush Opacity="0.8" Color="White" />
+                    </TextBox.Background>
+                </TextBox>
+                <TextBox
+                    Name="txtTimer"
+                    Grid.Column="0"
+                    Height="70"
+                    Margin="20,20,20,20"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="30"
                     FontWeight="Bold"
                     Foreground="Black"
                     TextAlignment="Center"
@@ -223,7 +269,8 @@
                     Visibility="Visible">
                     Verberg woord
                 </Label>
-                <Label Name="btnStartSinglePlayer"
+                <Label
+                    Name="btnStartSinglePlayer"
                     Grid.Row="4"
                     Grid.Column="2"
                     HorizontalAlignment="Center"
@@ -238,8 +285,10 @@
                     MouseDown="btnStartSinglePlayer_MouseDown"
                     MouseEnter="btnAll_MouseEnter"
                     MouseLeave="btnAll_MouseLeave"
-                    Visibility="Hidden">Start</Label>
-                
+                    Visibility="Hidden">
+                    Start
+                </Label>
+
                 <TextBox
                     Name="lblTimer"
                     Grid.Row="4"
@@ -286,6 +335,7 @@
                     Grid.RowSpan="2"
                     Grid.Column="0" />
                 <Grid
+                    Name="imgPaper"
                     Grid.Row="1"
                     Grid.RowSpan="3"
                     Grid.Column="2">
@@ -294,6 +344,7 @@
 
                     </Grid.Background>
                 </Grid>
+                
 
                 <TextBox
                     Name="txtTextDisplay"
@@ -310,13 +361,10 @@
                     Foreground="Black"
                     TextAlignment="Center"
                     TextWrapping="Wrap"
-                    Visibility="Hidden">
-                    
-                </TextBox>
+                    Visibility="Hidden" />
                 <Label
                     Name="lblNaamBevestigen"
                     Grid.Row="3"
-                   
                     Grid.Column="1"
                     Margin="40,0,0,50"
                     HorizontalAlignment="Center"
@@ -354,16 +402,16 @@
                 <Label
                     Name="lblText"
                     Grid.Row="1"
-                    Background="SandyBrown"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Padding="10"
                     Grid.Column="1"
+                    Margin="30,40,0,0"
+                    Padding="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="SandyBrown"
                     FontSize="25"
                     FontWeight="Bold"
                     Foreground="Black"
-                    Visibility="Hidden"
-                    Margin="30 40 0 0">
+                    Visibility="Hidden">
                     Geef je naam in
                 </Label>
             </Grid>
