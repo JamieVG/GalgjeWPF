@@ -28,7 +28,6 @@ namespace GalgjeWPF
         string fouteLetters;
         private static string geheimWoord;
         private int levens = 10;
-        string woordVerbergen;
         Image[] afbeeldingStukjes;
         string[] woordArray = new string[0];
         string[] verborgenWoordArray;
@@ -40,6 +39,8 @@ namespace GalgjeWPF
         private static Color red = new Color();
         private static int indexRandomWoord;
         private bool askedForHint;
+        private int timerInput = 10;
+
         private static string[] letters = new string[]
         {
             "a",
@@ -195,7 +196,7 @@ namespace GalgjeWPF
         ///</Summary>
         private void btnRaad_Click(object sender, RoutedEventArgs e)
         {
-            seconden = 11;
+            seconden = timerInput+1;
             dockPanelTweeSpelers.Background = Brushes.Transparent;
             timer.Start();
             imageOutput.Visibility = Visibility.Visible;
@@ -275,19 +276,42 @@ namespace GalgjeWPF
 
         private void btnVerberg_Click(object sender, RoutedEventArgs e)
         {
-            geheimWoord = txtInput.Text.ToLower();
+            try
+            {
+                timerInput = Convert.ToInt32(txtTimerInstellen.Text);
 
-            VerbergClickVisibility();
+            }
+            catch (FormatException)
+            {
+                
+                MessageBox.Show("Je hebt geen timer ingesteld");
+            }
+            if (timerInput <5 || timerInput > 20)
+            {
+                MessageBox.Show("Gelieve een timer in te stellen tussen 5 en 20 seconden!");
+                txtTimerInstellen.Clear();
 
-            PrintUserOutPut();
+            }
+            else
+            {
+                geheimWoord = txtInput.Text.ToLower();
 
-            AanmakenMaskArray();
+                seconden = timerInput;
+
+                VerbergClickVisibility();
+
+                PrintUserOutPut();
+
+                AanmakenMaskArray();
+
+                txtInput.Clear();
+
+                lblTimer.Text = seconden.ToString();
+                timer.Start();
+            }
             
-            txtInput.Clear();
 
-            
-            lblTimer.Text = seconden.ToString();
-            timer.Start();
+           
         }
 
 
@@ -302,6 +326,9 @@ namespace GalgjeWPF
             txtWoord.Visibility = Visibility.Visible;
             lblTimer.Visibility = Visibility.Visible;
             mnuTimer.Visibility = Visibility.Hidden;
+            txtTimerInstellen.Visibility = Visibility.Hidden;
+            lblTimerInstellen.Visibility = Visibility.Hidden;
+            lblInputWoord.Visibility = Visibility.Hidden;
         }
 
         //<summary>
@@ -434,12 +461,6 @@ namespace GalgjeWPF
             mnuTimer.Visibility = Visibility.Visible;
             btnStartSinglePlayer.Visibility = Visibility.Hidden;
             
-
-
-
-
-
-
         }
 
         // Methode voor printen van juiste letters
@@ -501,7 +522,7 @@ namespace GalgjeWPF
         {
             timer.Interval = new TimeSpan(0, 0, 1); 
             timer.Tick += TimerTick;
-            seconden = 10;
+            seconden = timerInput;
         }
         //TimerTick event 
         // Eerste if : als de timer op 11 komt dan display '10', zo lijkt het dat de timer wacht
@@ -511,18 +532,18 @@ namespace GalgjeWPF
         private void TimerTick(object sender, EventArgs e)
         {
             lblTimer.Text = seconden.ToString();
-            if (seconden == 11)
+            if (seconden == timerInput)
             {
-                lblTimer.Text = "10";
+                lblTimer.Text = timerInput.ToString();
 
             }
             if (seconden == -1)
             {
                 txtTijdOp.Clear();
-                lblTimer.Text = "10";
+                lblTimer.Text = timerInput.ToString();
                 timer.Stop();
                 levens--;
-                seconden = 11;
+                seconden = timerInput+1;
                 PrintUserOutPut();
                 timer.Start();
                 dockPanelTweeSpelers.Background = Brushes.Transparent;
@@ -541,8 +562,9 @@ namespace GalgjeWPF
             {
                 YouLose();   
             }
-            if (seconden == 10 || seconden == 11)
+            if (seconden == timerInput || seconden == timerInput +1)
             {
+                lblTimer.Text = timerInput.ToString();
                 txtTijdOp.Visibility = Visibility.Hidden;
                 txtTijdOp2.Visibility = Visibility.Hidden;
                 dockPanelTweeSpelers.Background = Brushes.Transparent;
@@ -553,12 +575,12 @@ namespace GalgjeWPF
         //methode om de seconden terug te resetten
         private void TimerReset() 
         {
-            seconden = 10;
+            seconden = timerInput;
         }
         private void DateTimeNow() 
         {
             DateTime dag = new DateTime(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-            string moment =  dag.ToString();
+            string moment = dag.ToString();
         }
         
 
@@ -570,6 +592,9 @@ namespace GalgjeWPF
             txtInput.Visibility = Visibility.Visible;
             btnVerberg.Visibility = Visibility.Visible;
             imgHighScore.Visibility = Visibility.Hidden;
+            mnuTimer.Visibility = Visibility.Visible;
+            lblInputWoord.Visibility = Visibility.Visible;
+
 
             txtTextDisplay.Text = "Start een nieuw spel door een woord te verbergen. Ook kan je de tijd tussen een beurt instellen";
         }
@@ -584,6 +609,8 @@ namespace GalgjeWPF
             btnStartSinglePlayer.Visibility = Visibility.Visible;
             txtInput.Visibility = Visibility.Hidden;
             imgHighScore.Visibility = Visibility.Hidden;
+            mnuTimer.Visibility = Visibility.Visible;
+
 
 
 
@@ -591,7 +618,8 @@ namespace GalgjeWPF
 
         private void Timer_Click(object sender, RoutedEventArgs e)
         {
-
+            txtTimerInstellen.Visibility = Visibility.Visible;
+            lblTimerInstellen.Visibility = Visibility.Visible;
         }
 
         private void lblNaamBevestigen_MouseDown(object sender, MouseButtonEventArgs e)
@@ -616,25 +644,46 @@ namespace GalgjeWPF
         // controle button voor de single player
         private void btnStartSinglePlayer_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            txtInput.Visibility = Visibility.Visible;
-            lblTimer.Visibility = Visibility.Visible;
-            txtRandomWoord.Visibility = Visibility.Visible;
-            btnStartSinglePlayer.Visibility = Visibility.Hidden;
-            btnRaad.Visibility = Visibility.Visible;
-            btnNieuwSpel.Visibility = Visibility.Visible;
-            mnuTimer.Visibility = Visibility.Hidden;
+            try
+            {
+                timerInput = Convert.ToInt32(txtTimerInstellen.Text);
+
+            }
+            catch (FormatException)
+            {
+
+                MessageBox.Show("Je hebt geen timer ingesteld");
+            }
+            if (timerInput < 5 || timerInput > 20)
+            {
+                MessageBox.Show("Gelieve een timer in te stellen tussen 5 en 20 seconden!");
+                txtTimerInstellen.Clear();
+
+            }
+            else
+            {
+                seconden = timerInput;
+                txtInput.Visibility = Visibility.Visible;
+                lblTimer.Visibility = Visibility.Visible;
+                txtRandomWoord.Visibility = Visibility.Visible;
+                btnStartSinglePlayer.Visibility = Visibility.Hidden;
+                btnRaad.Visibility = Visibility.Visible;
+                btnNieuwSpel.Visibility = Visibility.Visible;
+                txtTimerInstellen.Visibility = Visibility.Hidden;
+                lblTimerInstellen.Visibility = Visibility.Hidden;
+
+                NewRandomWord();
+                PrintUserOutPut();
+
+                AanmakenMaskArray();
+
+                txtInput.Clear();
+
+
+                lblTimer.Text = seconden.ToString();
+                timer.Start();
+            }
             
-
-            NewRandomWord();
-            PrintUserOutPut();
-
-            AanmakenMaskArray();
-
-            txtInput.Clear();
-
-
-            lblTimer.Text = seconden.ToString();
-            timer.Start();
         }
 
         private void NewRandomWord() 
