@@ -25,9 +25,9 @@
                 Click="Timer_Click"
                 Header="Timer instellen"
                 IsEnabled="False" />
-            <MenuItem Click="Hint_Click" Header="Hint" />
-            <MenuItem Click="NieuwSpel_Click" Header="Nieuw Spel" />
-            <MenuItem Click="HighScore_Click" Header="Highscores" />
+            <MenuItem Name="mnuHint" IsEnabled="False" Click="Hint_Click" Header="Hint" />
+            <MenuItem  Click="NieuwSpel_Click" Header="Nieuw Spel" />
+            <MenuItem Name="mnuHighscore" Click="HighScore_Click" Header="Highscores" />
             <MenuItem Click="Afsluiten_Click" Header="Afsluiten" />
 
         </Menu>
@@ -114,7 +114,8 @@
                         Foreground="Black"
                         TextAlignment="Center"
                         TextWrapping="Wrap"
-                        Visibility="Hidden" />
+                        Visibility="Hidden" 
+                        IsReadOnly="False"/>
                 </Grid>
             </DockPanel>
         </Grid>
@@ -181,7 +182,8 @@
                     FontWeight="Bold"
                     Foreground="Black"
                     TextAlignment="Center"
-                    Visibility="Hidden">
+                    Visibility="Hidden"
+                    IsReadOnly="True">
                     <TextBox.Background>
                         <SolidColorBrush Opacity="0.8" Color="White" />
                     </TextBox.Background>
@@ -198,7 +200,8 @@
                     FontWeight="Bold"
                     Foreground="Black"
                     TextAlignment="Center"
-                    Visibility="Hidden">
+                    Visibility="Hidden"
+                    IsReadOnly="True">
                     <TextBox.Background>
                         <SolidColorBrush Opacity="0.8" Color="White" />
                     </TextBox.Background>
@@ -215,7 +218,7 @@
                     Foreground="Black"
                     TextAlignment="Center"
                     Visibility="Hidden"
-                    >
+                    IsReadOnly="True">
                     <TextBox.Background>
                         <SolidColorBrush Opacity="0.8" Color="White" />
                     </TextBox.Background>
@@ -312,7 +315,8 @@
                     FontSize="40"
                     FontWeight="Bold"
                     Foreground="Black"
-                    Visibility="Hidden" />
+                    Visibility="Hidden"
+                    IsReadOnly="True"/>
                 <TextBox
                     Name="txtTijdOp"
                     Grid.Row="1"
@@ -371,7 +375,8 @@
                     FontWeight="Bold"
                     Foreground="Black"
                     TextAlignment="Center"
-                    TextWrapping="Wrap" />
+                    TextWrapping="Wrap"
+                    IsReadOnly="True"/>
                 <Label
                     Name="lblNaamBevestigen"
                     Grid.Row="3"
@@ -390,7 +395,8 @@
                     MouseDown="lblNaamBevestigen_MouseDown"
                     MouseEnter="btnAll_MouseEnter"
                     MouseLeave="btnAll_MouseLeave"
-                    Visibility="Hidden" />
+                    Visibility="Hidden" 
+                    />
                 <TextBox
                     Name="txtBevestigNaam"
                     Grid.Row="2"
@@ -421,7 +427,8 @@
                     FontSize="25"
                     FontWeight="Bold"
                     Foreground="Black"
-                    Visibility="Hidden">
+                    Visibility="Hidden"
+                   >
                     Geef je naam in
                 </Label>
 

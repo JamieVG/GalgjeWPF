@@ -201,7 +201,7 @@ namespace GalgjeWPF
             imgHighScore.Visibility = Visibility.Hidden;
             mnuTimer.IsEnabled = true;
             lblInputWoord.Visibility = Visibility.Visible;
-
+            mnuHighscore.IsEnabled = false;
 
             txtTextDisplay.Text = "Start een nieuw spel door een woord te verbergen. Ook kan je de tijd tussen een beurt instellen";
         }
@@ -222,6 +222,8 @@ namespace GalgjeWPF
             txtInput.Visibility = Visibility.Hidden;
             imgHighScore.Visibility = Visibility.Hidden;
             mnuTimer.IsEnabled = true;
+            mnuHighscore.IsEnabled = false;
+
 
 
 
@@ -320,6 +322,7 @@ namespace GalgjeWPF
                 txtTimerInstellen.Visibility = Visibility.Hidden;
                 lblTimerInstellen.Visibility = Visibility.Hidden;
                 mnuTimer.IsEnabled = false;
+                mnuHint.IsEnabled = true;
 
 
                 NewRandomWord();
@@ -690,7 +693,8 @@ namespace GalgjeWPF
             mnuTimer.Visibility = Visibility.Visible;
             btnStartSinglePlayer.Visibility = Visibility.Hidden;
             mnuTimer.IsEnabled = false;
-
+            mnuHint.IsEnabled = false;
+            mnuHighscore.IsEnabled = true;
         }
         #endregion
 
