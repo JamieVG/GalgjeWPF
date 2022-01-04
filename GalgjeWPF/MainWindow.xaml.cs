@@ -203,7 +203,7 @@ namespace GalgjeWPF
             lblInputWoord.Visibility = Visibility.Visible;
             mnuHighscore.IsEnabled = false;
 
-            txtTextDisplay.Text = "Start een nieuw spel door een woord te verbergen. Ook kan je de tijd tussen een beurt instellen";
+            txtTextDisplay.Content = "Start een nieuw spel\n\r door een woord te verbergen.\n\r Ook kan je de tijd\n\r tussen een beurt instellen";
         }
         // 'lblSinglePlayer_MouseDown' :
         // MouseDown event dat ervoor zorgt dat het spel alleen kan gespeeld worden
@@ -213,7 +213,7 @@ namespace GalgjeWPF
 
         private void lblSinglePlayer_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            txtTextDisplay.Text = "Start een nieuw spel door op de 'Start' button te drukken. Ook kan je de tijd tussen een beurt instellen";
+            txtTextDisplay.Content = "Start een nieuw spel\n\r door op de 'Start' button te drukken.\n\r Ook kan je de tijd\n\r tussen een beurt instellen";
             dockPanelStart.Visibility = Visibility.Hidden;
             dockPanelTweeSpelers.Visibility = Visibility.Visible;
             txtTextDisplay.Visibility = Visibility.Visible;
@@ -280,7 +280,7 @@ namespace GalgjeWPF
 
                 txtInput.Clear();
 
-                lblTimer.Text = seconden.ToString();
+                lblTimer.Content = seconden.ToString();
                 timer.Start();
             }
                       
@@ -333,7 +333,7 @@ namespace GalgjeWPF
                 txtInput.Clear();
 
 
-                lblTimer.Text = seconden.ToString();
+                lblTimer.Content = seconden.ToString();
                 timer.Start();
             }
 
@@ -354,6 +354,7 @@ namespace GalgjeWPF
             lblTimerInstellen.Visibility = Visibility.Hidden;
             lblInputWoord.Visibility = Visibility.Hidden;
             mnuTimer.IsEnabled = false;
+            mnuHint.IsEnabled = true;
         }
         #endregion
 
@@ -371,16 +372,16 @@ namespace GalgjeWPF
         // Ervoor zorgen dat timer kan pauzeren
         private void TimerTick(object sender, EventArgs e)
         {
-            lblTimer.Text = seconden.ToString();
+            lblTimer.Content = seconden.ToString();
             if (seconden == timerInput)
             {
-                lblTimer.Text = timerInput.ToString();
+                lblTimer.Content = timerInput.ToString();
 
             }
             if (seconden == -1)
             {
-                txtTijdOp.Clear();
-                lblTimer.Text = timerInput.ToString();
+                txtTijdOp.Content = "";
+                lblTimer.Content = timerInput.ToString();
                 timer.Stop();
                 levens--;
                 seconden = timerInput+1;
@@ -404,7 +405,7 @@ namespace GalgjeWPF
             }
             if (seconden == timerInput || seconden == timerInput +1)
             {
-                lblTimer.Text = timerInput.ToString();
+                lblTimer.Content = timerInput.ToString();
                 txtTijdOp.Visibility = Visibility.Hidden;
                 txtTijdOp2.Visibility = Visibility.Hidden;
                 dockPanelTweeSpelers.Background = Brushes.Transparent;
@@ -442,8 +443,8 @@ namespace GalgjeWPF
             }
             foreach (var item in verborgenWoordArray)
             {
-                txtWoord.Text += item;
-                txtRandomWoord.Text += item;
+                txtWoord.Content += item;
+                txtRandomWoord.Content += item;
             }
         }
         // Methode die het mask aanpast
@@ -451,8 +452,8 @@ namespace GalgjeWPF
         {
             foreach (var item in verborgenWoordArray)
             {
-                txtWoord.Text += Convert.ToString(item);
-                txtRandomWoord.Text += Convert.ToString(item);
+                txtWoord.Content += Convert.ToString(item);
+                txtRandomWoord.Content += Convert.ToString(item);
             }
         }
         #endregion
@@ -487,8 +488,8 @@ namespace GalgjeWPF
                             }
                         }
                         JuisteLettersTonen();
-                        txtWoord.Text = "";
-                        txtRandomWoord.Text = "";
+                        txtWoord.Content = "";
+                        txtRandomWoord.Content = "";
                         PrintenMask();
                         PrintUserOutPut();
                         if (String.Join("", verborgenWoordArray) == String.Join("", woordArray))
@@ -579,7 +580,7 @@ namespace GalgjeWPF
             {
                 imageOutput.Children.Add(afbeeldingStukjes[i]);
             }
-            txtTextDisplay.Text = $"{levens} levens \n\r" +
+            txtTextDisplay.Content = $"{levens} levens \n\r" +
                             $"Juiste letters: {juisteLetters}\n\r" +
                             $"Foute letters: {fouteLetters}";
         }
@@ -593,7 +594,7 @@ namespace GalgjeWPF
         // Visibility functionaliteiten
         private void YouWin() 
         {
-            txtTextDisplay.Text = $"Je hebt het woordje '{geheimWoord}' geraden!";
+            txtTextDisplay.Content = $"Je hebt het woordje\n\r '{geheimWoord}' geraden!";
             timer.Stop();
             lblTimer.Visibility = Visibility.Hidden;
             txtWoord.Visibility = Visibility.Hidden;
@@ -615,7 +616,7 @@ namespace GalgjeWPF
         // Visibility functionaliteiten
         private void YouLose() 
         {
-            txtTextDisplay.Text = $"Oh spijtig, you lost\n:( Better luck next time!";
+            txtTextDisplay.Content = $"Oh spijtig, you lost\n\r:( Better luck next time!";
             timer.Stop();
             lblTimer.Visibility = Visibility.Hidden;
             btnRaad.Visibility = Visibility.Hidden;
@@ -648,7 +649,7 @@ namespace GalgjeWPF
             string minuten = dag.Minute.ToString();
             string seconden = dag.Second.ToString();
 
-            txtHighScore.Text += highscoreOutput.AppendLine($"{naam} - {levensVerloren} ({uren}:{minuten}:{seconden})").ToString();
+            txtHighScore.Content += highscoreOutput.AppendLine($"{naam} - {levensVerloren} ({uren}:{minuten}:{seconden})").ToString();
         }
         #endregion
 
@@ -674,14 +675,14 @@ namespace GalgjeWPF
             juisteLetters = "";
             fouteLetters = "";
             levens = 10;
-            txtWoord.Clear();
-            txtRandomWoord.Clear();
+            txtWoord.Content = "";
+            txtRandomWoord.Content = "";
             imageOutput.Children.Clear();
 
             timer.Stop();
             TimerReset();
 
-            txtTextDisplay.Text = "Geef een geheim woord in";
+            txtTextDisplay.Content = "Geef een geheim woord in";
             dockPanelTweeSpelers.Visibility = Visibility.Hidden;
             dockPanelStart.Visibility = Visibility.Visible;
             btnNieuwSpel.Visibility = Visibility.Hidden;
@@ -762,7 +763,7 @@ namespace GalgjeWPF
                 }
                 Random random = new Random();
                 hintLetter = overgeblevenLetters[random.Next(0, overgeblevenLetters.Count)].ToString();
-                fouteLetters += hintLetter;
+                fouteLetters += hintLetter+",";
                 MessageBox.Show($"De letter die ZEKER NIET voorkomt in het geheimwoord is: {hintLetter} ", "HINT");
             }
 
@@ -785,8 +786,8 @@ namespace GalgjeWPF
         // Methode voor message als tijd op is
         private void ToSlow() 
         {
-            txtTijdOp.Text = "Too Slow";
-            txtTijdOp2.Text = "B*TCH";
+            txtTijdOp.Content = "Too Slow";
+            txtTijdOp2.Content = "B*TCH";
         }
 
         // Random woord selecteren uit de array van woorden

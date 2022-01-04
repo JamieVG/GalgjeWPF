@@ -19,18 +19,28 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="20*" />
         </Grid.RowDefinitions>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem
-                Name="mnuTimer"
-                Click="Timer_Click"
-                Header="Timer instellen"
-                IsEnabled="False" />
-            <MenuItem Name="mnuHint" IsEnabled="False" Click="Hint_Click" Header="Hint" />
-            <MenuItem  Click="NieuwSpel_Click" Header="Nieuw Spel" />
-            <MenuItem Name="mnuHighscore" Click="HighScore_Click" Header="Highscores" />
-            <MenuItem Click="Afsluiten_Click" Header="Afsluiten" />
+        <Viewbox>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem
+                    Name="mnuTimer"
+                    Click="Timer_Click"
+                    Header="Timer instellen"
+                    IsEnabled="False" />
+                <MenuItem
+                    Name="mnuHint"
+                    Click="Hint_Click"
+                    Header="Hint"
+                    IsEnabled="False" />
+                <MenuItem Click="NieuwSpel_Click" Header="Nieuw Spel" />
+                <MenuItem
+                    Name="mnuHighscore"
+                    Click="HighScore_Click"
+                    Header="Highscores" />
+                <MenuItem Click="Afsluiten_Click" Header="Afsluiten" />
+            </Menu>
+        </Viewbox>
 
-        </Menu>
+
         <Grid Grid.Row="1" Visibility="Visible">
             <DockPanel
                 Name="dockPanelStart"
@@ -49,44 +59,49 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Label
-                        Name="lblSinglePlayer"
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Margin="40,20,0,20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"
-                        Background="SandyBrown"
-                        BorderBrush="Black"
-                        BorderThickness="4"
-                        Content="Singleplayer"
-                        Cursor="Hand"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Foreground="Black"
-                        MouseDown="lblSinglePlayer_MouseDown"
-                        MouseEnter="btnAll_MouseEnter"
-                        MouseLeave="btnAll_MouseLeave"
-                        Visibility="Visible" />
-                    <Label
-                        Name="lblTweeSpelers"
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Margin="40,20,0,50"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"
-                        Background="SandyBrown"
-                        BorderBrush="Black"
-                        BorderThickness="4"
-                        Content="Twee spelers"
-                        Cursor="Hand"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Foreground="Black"
-                        MouseDown="lblTweeSpelers_MouseDown"
-                        MouseEnter="btnAll_MouseEnter"
-                        MouseLeave="btnAll_MouseLeave"
-                        Visibility="Visible" />
+                    <Viewbox Grid.Row="2" Grid.Column="1">
+                        <Label
+                            Name="lblSinglePlayer"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="40,20,0,20"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Background="SandyBrown"
+                            BorderBrush="Black"
+                            BorderThickness="4"
+                            Content="Singleplayer"
+                            Cursor="Hand"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            MouseDown="lblSinglePlayer_MouseDown"
+                            MouseEnter="btnAll_MouseEnter"
+                            MouseLeave="btnAll_MouseLeave"
+                            Visibility="Visible" />
+                    </Viewbox>
+
+                    <Viewbox Grid.Row="3" Grid.Column="1">
+                        <Label
+                            Name="lblTweeSpelers"
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="57,20,0,50"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="SandyBrown"
+                            BorderBrush="Black"
+                            BorderThickness="4"
+                            Content="Twee spelers"
+                            Cursor="Hand"
+                            FontSize="32"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            MouseDown="lblTweeSpelers_MouseDown"
+                            MouseEnter="btnAll_MouseEnter"
+                            MouseLeave="btnAll_MouseLeave"
+                            Visibility="Visible" />
+                    </Viewbox>
                     <Grid
                         Name="imgHighScore"
                         Grid.Row="1"
@@ -99,23 +114,27 @@
 
                         </Grid.Background>
                     </Grid>
-                    <TextBox
-                        Name="txtHighScore"
+                    <Viewbox
                         Grid.Row="1"
                         Grid.RowSpan="3"
-                        Grid.Column="0"
-                        Margin="20,50"
-                        Padding="10,30"
-                        HorizontalAlignment="Center"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        FontSize="15"
-                        FontWeight="Bold"
-                        Foreground="Black"
-                        TextAlignment="Center"
-                        TextWrapping="Wrap"
-                        Visibility="Hidden" 
-                        IsReadOnly="False"/>
+                        Grid.Column="0">
+                        <Label
+                            Name="txtHighScore"
+                            Grid.Row="1"
+                            Grid.RowSpan="3"
+                            Grid.Column="0"
+                            Margin="20,50"
+                            Padding="10,30"
+                            HorizontalAlignment="Center"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            FontSize="15"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            Visibility="Hidden" />
+                    </Viewbox>
+
+
                 </Grid>
             </DockPanel>
         </Grid>
@@ -162,32 +181,33 @@
                         <SolidColorBrush Opacity="0.8" Color="White" />
                     </TextBox.Background>
                 </TextBox>
-                <Label
-                    Name="lblInputWoord"
-                    Grid.Row="3"
-                    Padding="15"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="SandyBrown"
-                    Content="Geef hier je geheimwoord in:"
-                    Visibility="Hidden" />
-                <TextBox
-                    Name="txtWoord"
-                    Grid.Row="4"
-                    Grid.Column="1"
-                    Margin="0,0,20,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="40"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    TextAlignment="Center"
-                    Visibility="Hidden"
-                    IsReadOnly="True">
-                    <TextBox.Background>
-                        <SolidColorBrush Opacity="0.8" Color="White" />
-                    </TextBox.Background>
-                </TextBox>
+                <Viewbox Grid.Row="3">
+                    <Label
+                        Name="lblInputWoord"
+                        Grid.Row="3"
+                        Margin="20,20"
+                        Padding="15"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="SandyBrown"
+                        Content="Geef hier je geheimwoord in:"
+                        Visibility="Hidden" />
+                </Viewbox>
+                <Viewbox Grid.Row="4" Grid.Column="1">
+                    <Label
+                        Name="txtWoord"
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="20,20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="SandyBrown"
+                        FontSize="40"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Visibility="Hidden" />
+                </Viewbox>
+
 
                 <TextBox
                     Name="txtTimer"
@@ -199,152 +219,167 @@
                     FontSize="30"
                     FontWeight="Bold"
                     Foreground="Black"
+                    IsReadOnly="True"
                     TextAlignment="Center"
-                    Visibility="Hidden"
-                    IsReadOnly="True">
+                    Visibility="Hidden">
                     <TextBox.Background>
                         <SolidColorBrush Opacity="0.8" Color="White" />
                     </TextBox.Background>
                 </TextBox>
-                <TextBox
-                    Name="txtRandomWoord"
-                    Grid.Row="4"
-                    Grid.Column="1"
-                    Margin="0,0,20,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="40"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    TextAlignment="Center"
-                    Visibility="Hidden"
-                    IsReadOnly="True">
-                    <TextBox.Background>
-                        <SolidColorBrush Opacity="0.8" Color="White" />
-                    </TextBox.Background>
-                </TextBox>
-                <Label
-                    Name="btnRaad"
-                    Grid.Row="4"
-                    Grid.Column="2"
-                    Margin="40,20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Background="SandyBrown"
-                    BorderBrush="Black"
-                    BorderThickness="4"
-                    Cursor="Hand"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    MouseDown="btnRaad_Click"
-                    MouseEnter="btnAll_MouseEnter"
-                    MouseLeave="btnAll_MouseLeave"
-                    Visibility="Hidden">
-                    Raad
-                </Label>
+                <Viewbox Grid.Row="4" Grid.Column="1">
+                    <Label
+                        Name="txtRandomWoord"
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="20,20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="SandyBrown"
+                        FontSize="40"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Visibility="Hidden" />
+                </Viewbox>
+                <Viewbox Grid.Row="4" Grid.Column="2">
+                    <Label
+                        Name="btnRaad"
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Margin="40,20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Background="SandyBrown"
+                        BorderBrush="Black"
+                        BorderThickness="4"
+                        Cursor="Hand"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        MouseDown="btnRaad_Click"
+                        MouseEnter="btnAll_MouseEnter"
+                        MouseLeave="btnAll_MouseLeave"
+                        Visibility="Hidden">
+                        Raad
+                    </Label>
+                </Viewbox>
+                <Viewbox Grid.Row="0" Grid.Column="2">
+                    <Label
+                        Name="btnNieuwSpel"
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Margin="50,20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Background="SandyBrown"
+                        BorderBrush="Black"
+                        BorderThickness="4"
+                        Cursor="Hand"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        MouseDown="btnNieuwSpel_Click"
+                        MouseEnter="btnAll_MouseEnter"
+                        MouseLeave="btnAll_MouseLeave"
+                        Visibility="Hidden">
+                        Nieuw Spel
+                    </Label>
+                </Viewbox>
+                <Viewbox Grid.Row="4" Grid.Column="2">
+                    <Label
+                        Name="btnVerberg"
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Margin="0,0,0,25"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Background="SandyBrown"
+                        BorderBrush="Black"
+                        BorderThickness="4"
+                        Cursor="Hand"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        MouseDown="btnVerberg_Click"
+                        MouseEnter="btnAll_MouseEnter"
+                        MouseLeave="btnAll_MouseLeave"
+                        Visibility="Visible">
+                        Verberg woord
+                    </Label>
+                </Viewbox>
+                <Viewbox Grid.Row="4" Grid.Column="2">
+                    <Label
+                        Name="btnStartSinglePlayer"
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Margin="20,20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="SandyBrown"
+                        BorderBrush="Black"
+                        BorderThickness="4"
+                        Cursor="Hand"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        MouseDown="btnStartSinglePlayer_MouseDown"
+                        MouseEnter="btnAll_MouseEnter"
+                        MouseLeave="btnAll_MouseLeave"
+                        Visibility="Hidden">
+                        Start
+                    </Label>
+                </Viewbox>
 
-                <Label
-                    Name="btnNieuwSpel"
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Margin="50,20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Background="SandyBrown"
-                    BorderBrush="Black"
-                    BorderThickness="4"
-                    Cursor="Hand"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    MouseDown="btnNieuwSpel_Click"
-                    MouseEnter="btnAll_MouseEnter"
-                    MouseLeave="btnAll_MouseLeave"
-                    Visibility="Hidden">
-                    Nieuw Spel
-                </Label>
-                <Label
-                    Name="btnVerberg"
-                    Grid.Row="4"
-                    Grid.Column="2"
-                    Margin="0,0,0,25"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Background="SandyBrown"
-                    BorderBrush="Black"
-                    BorderThickness="4"
-                    Cursor="Hand"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    MouseDown="btnVerberg_Click"
-                    MouseEnter="btnAll_MouseEnter"
-                    MouseLeave="btnAll_MouseLeave"
-                    Visibility="Visible">
-                    Verberg woord
-                </Label>
-                <Label
-                    Name="btnStartSinglePlayer"
-                    Grid.Row="4"
-                    Grid.Column="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="SandyBrown"
-                    BorderBrush="Black"
-                    BorderThickness="4"
-                    Cursor="Hand"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    MouseDown="btnStartSinglePlayer_MouseDown"
-                    MouseEnter="btnAll_MouseEnter"
-                    MouseLeave="btnAll_MouseLeave"
-                    Visibility="Hidden">
-                    Start
-                </Label>
-
-                <TextBox
-                    Name="lblTimer"
-                    Grid.Row="4"
-                    Grid.Column="0"
-                    Margin="10"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Background="SandyBrown"
-                    FontSize="40"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    Visibility="Hidden"
-                    IsReadOnly="True"/>
-                <TextBox
-                    Name="txtTijdOp"
+                <Viewbox Grid.Row="4" Grid.Column="0">
+                    <Label
+                        Name="lblTimer"
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Margin="20,20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="SandyBrown"
+                        FontSize="40"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Visibility="Hidden" />
+                </Viewbox>
+                <Viewbox
                     Grid.Row="1"
                     Grid.RowSpan="2"
-                    Grid.Column="1"
-                    Margin="20,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    FontSize="60"
-                    Foreground="DarkBlue"
-                    TextWrapping="Wrap"
-                    Visibility="Hidden" />
-                <TextBox
-                    Name="txtTijdOp2"
+                    Grid.Column="1">
+                    <Label
+                        Name="txtTijdOp"
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Margin="20,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontSize="60"
+                        Foreground="DarkBlue"
+                        Visibility="Hidden" />
+                </Viewbox>
+                <Viewbox
                     Grid.Row="2"
                     Grid.RowSpan="2"
-                    Grid.Column="1"
-                    Margin="20,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    FontSize="60"
-                    Foreground="DarkBlue"
-                    TextWrapping="Wrap"
-                    Visibility="Hidden" />
+                    Grid.Column="1">
+                    <Label
+                        Name="txtTijdOp2"
+                        Grid.Row="2"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Margin="20,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontSize="60"
+                        Foreground="DarkBlue"
+                        Visibility="Hidden" />
+                </Viewbox>
+
                 <Grid
                     Name="imageOutput"
                     Grid.Row="2"
@@ -360,43 +395,48 @@
 
                     </Grid.Background>
                 </Grid>
-
-                <TextBox
-                    Name="txtTextDisplay"
+                <Viewbox
                     Grid.Row="1"
                     Grid.RowSpan="3"
-                    Grid.Column="2"
-                    Margin="20,50"
-                    Padding="10,30"
-                    HorizontalAlignment="Center"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    FontSize="15"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    TextAlignment="Center"
-                    TextWrapping="Wrap"
-                    IsReadOnly="True"/>
-                <Label
-                    Name="lblNaamBevestigen"
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    Margin="40,0,0,50"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Background="SandyBrown"
-                    BorderBrush="Black"
-                    BorderThickness="4"
-                    Content="Bevestig naam"
-                    Cursor="Hand"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    MouseDown="lblNaamBevestigen_MouseDown"
-                    MouseEnter="btnAll_MouseEnter"
-                    MouseLeave="btnAll_MouseLeave"
-                    Visibility="Hidden" 
-                    />
+                    Grid.Column="2">
+                    <Label
+                        Name="txtTextDisplay"
+                        Grid.Row="1"
+                        Grid.RowSpan="3"
+                        Grid.Column="2"
+                        Margin="20,50"
+                        Padding="10,30"
+                        HorizontalAlignment="Center"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontSize="15"
+                        FontWeight="Bold"
+                        Foreground="Black" />
+                </Viewbox>
+
+
+                <Viewbox Grid.Row="3" Grid.Column="1">
+                    <Label
+                        Name="lblNaamBevestigen"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="40,0,0,50"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Background="SandyBrown"
+                        BorderBrush="Black"
+                        BorderThickness="4"
+                        Content="Bevestig naam"
+                        Cursor="Hand"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        MouseDown="lblNaamBevestigen_MouseDown"
+                        MouseEnter="btnAll_MouseEnter"
+                        MouseLeave="btnAll_MouseLeave"
+                        Visibility="Hidden" />
+                </Viewbox>
+
                 <TextBox
                     Name="txtBevestigNaam"
                     Grid.Row="2"
@@ -415,33 +455,38 @@
                     </TextBox.Background>
 
                 </TextBox>
-                <Label
-                    Name="lblText"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="30,40,0,0"
-                    Padding="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="SandyBrown"
-                    FontSize="25"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    Visibility="Hidden"
-                   >
-                    Geef je naam in
-                </Label>
+                <Viewbox Grid.Row="1" Grid.Column="1">
+                    <Label
+                        Name="lblText"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="30,40,0,0"
+                        Padding="10"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="SandyBrown"
+                        FontSize="25"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Visibility="Hidden">
+                        Geef je naam in
+                    </Label>
+                </Viewbox>
 
 
-                <Label
-                    Name="lblTimerInstellen"
-                    Grid.Row="4"
-                    Padding="15"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="SandyBrown"
-                    Content="Timer instellen ( tussen 5 en 20s )"
-                    Visibility="Hidden" />
+                <Viewbox Grid.Row="4">
+                    <Label
+                        Name="lblTimerInstellen"
+                        Grid.Row="4"
+                        Margin="20,20"
+                        Padding="15"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="SandyBrown"
+                        Content="Timer instellen ( tussen 5 en 20s )"
+                        Visibility="Hidden" />
+                </Viewbox>
+
                 <TextBox
                     Name="txtTimerInstellen"
                     Grid.Row="4"
